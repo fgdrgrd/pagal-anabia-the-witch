@@ -1,105 +1,44 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="ur">
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Pagal Anabia the Witch</title>
+  <title>پاگل عنابیہ - جادوگرنی کی کہانی</title>
   <link rel="stylesheet" href="style.css" />
 </head>
 <body>
-  <!-- 🔮 Background video -->
-  <video autoplay muted loop id="bg-video">
-    <source src="https://cdn.pixabay.com/video/2021/09/13/88716-601105122_large.mp4" type="video/mp4">
-  </video>
+  <div class="container">
+    <h1>🕯️ پاگل عنابیہ: جادوگرنی کی کہانی 🕯️</h1>
 
-  <!-- 🔊 Sounds -->
-  <audio id="bg-music" loop>
-    <source src="https://cdn.pixabay.com/audio/2021/11/02/audio_2a1e95c6a9.mp3" type="audio/mpeg" />
-  </audio>
-  <audio id="thunder">
-    <source src="https://cdn.pixabay.com/audio/2023/03/15/audio_4ee8e7f5d2.mp3" type="audio/mpeg" />
-  </audio>
+    <video controls autoplay loop muted>
+      <source src="dark-forest.mp4" type="video/mp4">
+      Your browser does not support the video tag.
+    </video>
 
-  <!-- ⚡ Flash + Title Screen -->
-  <div class="flash" id="flash"></div>
-  <div class="title-screen" id="title-screen">
-    <h1>⚡ Pagal Anabia the Witch ⚡</h1>
-  </div>
-
-  <!-- 🧙 Main Content -->
-  <div class="container" id="content">
-    <h1>Pagal Anabia the Witch</h1>
     <p id="story">
-      In a forgotten forest covered in endless fog, there lived a strange witch — Pagal Anabia.  
-      Her laughter echoed through the darkness, twisting the trees and waking shadows that should have slept forever.  
-      She mixed potions that glowed like fireflies and whispered to the wind as if it were alive.  
-      But one night, as the moon turned red, her spell went wrong.  
-      The ground trembled, the fire died, and her own voice cursed her name.  
-      With her last breath, she smiled and whispered, "Gagar will come back..."  
-      Then, silence — forever.
+      ایک وقت کی بات ہے، ایک اندھیرے جنگل میں پاگل عنابیہ رہتی تھی۔  
+      وہ رات کے اندھیرے میں جادو کرتی، آندھیاں بلاتی، اور لوگوں کے خواب چُرا لیتی۔  
+      لیکن ایک دن، اس کے جادو نے اُسے ہی نگل لیا...  
+      اُس کے آخری الفاظ تھے — "گگار واپس آئے گا..."  
     </p>
 
-    <div class="buttons">
-      <button id="playBtn">🎧 Play Music</button>
-      <button id="speakBtn">🔊 Read Story</button>
-    </div>
+    <button id="speakBtn">🔊 کہانی سنو</button>
   </div>
 
+  <audio id="bgMusic" src="dark-ambient.mp3" loop autoplay></audio>
+
   <script>
-    const bgMusic = document.getElementById("bg-music");
-    const thunder = document.getElementById("thunder");
-    const flash = document.getElementById("flash");
-    const playBtn = document.getElementById("playBtn");
-    const speakBtn = document.getElementById("speakBtn");
     const storyText = document.getElementById("story").innerText;
-    const titleScreen = document.getElementById("title-screen");
-    const content = document.getElementById("content");
+    const speakBtn = document.getElementById("speakBtn");
 
-    // Show title screen, then fade out
-    window.onload = () => {
-      content.style.display = "none";
-      setTimeout(() => {
-        titleScreen.classList.add("fade-out");
-        setTimeout(() => {
-          titleScreen.style.display = "none";
-          content.style.display = "block";
-        }, 2000);
-      }, 3000); // show title for 3s
-    };
-
-    // Music control
-    playBtn.addEventListener("click", () => {
-      if (bgMusic.paused) {
-        bgMusic.play();
-        playBtn.innerText = "⏸️ Pause Music";
-      } else {
-        bgMusic.pause();
-        playBtn.innerText = "🎧 Play Music";
-      }
+    speakBtn.addEventListener("click", () => {
+      const utterance = new SpeechSynthesisUtterance(storyText);
+      utterance.lang = "ur-PK"; // Urdu voice (Pakistan)
+      utterance.pitch = 0.9;
+      utterance.rate = 0.9;
+      utterance.volume = 1;
+      speechSynthesis.speak(utterance);
     });
-
-    // Flash + thunder near story end
-    function triggerFlash() {
-      flash.classList.add("active");
-      thunder.play();
-      setTimeout(() => flash.classList.remove("active"), 700);
-    }
-
-    // Speak story
-    function speakStory() {
-      const voices = window.speechSynthesis.getVoices();
-      const voice =
-        voices.find(v => v.name.toLowerCase().includes("male")) || voices[0];
-      const speech = new SpeechSynthesisUtterance(storyText);
-      speech.voice = voice;
-      speech.lang = "en-US";
-      speech.rate = 0.9;
-      speech.pitch = 0.8;
-      const totalTime = storyText.split(" ").length * 200;
-      setTimeout(triggerFlash, totalTime - 6000);
-      window.speechSynthesis.speak(speech);
-    }
-    speakBtn.addEventListener("click", speakStory);
   </script>
 </body>
 </html>
