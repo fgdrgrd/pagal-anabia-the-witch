@@ -1,139 +1,54 @@
-/* ===== Background video ===== */
-#bg-video {
-  position: fixed;
-  top: 0;
-  left: 0;
-  width: 100vw;
-  height: 100vh;
-  object-fit: cover;
-  z-index: -2;
-  filter: brightness(0.35) contrast(1.1);
-}
-
-/* ===== Page basics ===== */
 body {
+  background-color: #0b0b0b;
+  color: #e6e6e6;
+  font-family: "Noto Nastaliq Urdu", serif;
+  text-align: center;
   margin: 0;
   padding: 0;
-  font-family: "Georgia", serif;
-  color: #f3f3f3;
-  background-color: #000;
-  text-align: center;
 }
 
-/* ===== Main content box ===== */
 .container {
-  position: relative;
-  margin: 8vh auto;
-  max-width: 600px;
-  background-color: rgba(10, 10, 10, 0.8);
-  border-radius: 15px;
-  border: 2px solid #800050;
-  box-shadow: 0 0 35px rgba(255, 0, 255, 0.25);
-  padding: 35px;
-  backdrop-filter: blur(4px);
-  animation: fadeIn 2s ease-in-out;
-}
-
-@keyframes fadeIn {
-  from {
-    opacity: 0;
-    transform: translateY(20px);
-  }
-  to {
-    opacity: 1;
-    transform: translateY(0);
-  }
+  padding: 20px;
 }
 
 h1 {
-  color: #ff007f;
-  text-shadow: 0 0 25px #ff007f;
-  margin-bottom: 25px;
+  color: #d8b4fe;
+  font-size: 2rem;
+  margin-bottom: 20px;
+  text-shadow: 0 0 10px #8a2be2;
+}
+
+video {
+  width: 80%;
+  border-radius: 10px;
+  margin-bottom: 20px;
+  box-shadow: 0 0 25px rgba(138, 43, 226, 0.5);
 }
 
 p {
-  font-size: 18px;
-  line-height: 1.6;
-  margin-bottom: 20px;
-  text-shadow: 0 0 10px #660066;
-}
-
-/* ===== Buttons ===== */
-.buttons {
-  display: flex;
-  justify-content: center;
-  gap: 15px;
+  font-size: 1.3rem;
+  line-height: 2;
+  margin: 20px auto;
+  width: 80%;
+  text-shadow: 0 0 8px rgba(255, 255, 255, 0.2);
 }
 
 button {
-  background-color: #660033;
+  background: linear-gradient(90deg, #8a2be2, #4b0082);
   color: white;
   border: none;
   padding: 12px 25px;
   border-radius: 8px;
-  font-size: 16px;
+  font-size: 1rem;
   cursor: pointer;
-  box-shadow: 0 0 15px #ff007f;
-  transition: all 0.3s ease;
+  transition: 0.3s;
 }
+
 button:hover {
-  background-color: #990066;
-  transform: scale(1.1);
+  background: linear-gradient(90deg, #9d4edd, #3a0ca3);
+  box-shadow: 0 0 10px #9d4edd;
 }
 
-/* ===== Lightning flash ===== */
-.flash {
-  position: fixed;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  background: white;
-  opacity: 0;
-  z-index: 10;
-  pointer-events: none;
-  transition: opacity 0.2s;
-}
-.flash.active {
-  opacity: 0.9;
-}
-
-/* ===== Title screen animation ===== */
-.title-screen {
-  position: fixed;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  background-color: black;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  z-index: 20;
-  animation: titleFadeIn 2s ease-in;
-}
-.title-screen h1 {
-  color: #ff007f;
-  font-size: 3em;
-  text-shadow: 0 0 30px #ff007f;
-}
-.title-screen.fade-out {
-  animation: titleFadeOut 2s forwards;
-}
-
-@keyframes titleFadeIn {
-  from {
-    opacity: 0;
-  }
-  to {
-    opacity: 1;
-  }
-}
-@keyframes titleFadeOut {
-  from {
-    opacity: 1;
-  }
-  to {
-    opacity: 0;
-  }
+audio {
+  display: none;
 }
