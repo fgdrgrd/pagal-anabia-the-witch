@@ -7,22 +7,27 @@
   <link rel="stylesheet" href="style.css" />
 </head>
 <body>
-  <!-- 🔮 Dark looping video background -->
+  <!-- 🔮 Background video -->
   <video autoplay muted loop id="bg-video">
     <source src="https://cdn.pixabay.com/video/2021/09/13/88716-601105122_large.mp4" type="video/mp4">
   </video>
 
+  <!-- 🔊 Sounds -->
   <audio id="bg-music" loop>
     <source src="https://cdn.pixabay.com/audio/2021/11/02/audio_2a1e95c6a9.mp3" type="audio/mpeg" />
   </audio>
-
   <audio id="thunder">
     <source src="https://cdn.pixabay.com/audio/2023/03/15/audio_4ee8e7f5d2.mp3" type="audio/mpeg" />
   </audio>
 
+  <!-- ⚡ Flash + Title Screen -->
   <div class="flash" id="flash"></div>
+  <div class="title-screen" id="title-screen">
+    <h1>⚡ Pagal Anabia the Witch ⚡</h1>
+  </div>
 
-  <div class="container">
+  <!-- 🧙 Main Content -->
+  <div class="container" id="content">
     <h1>Pagal Anabia the Witch</h1>
     <p id="story">
       In a forgotten forest covered in endless fog, there lived a strange witch — Pagal Anabia.  
@@ -47,8 +52,22 @@
     const playBtn = document.getElementById("playBtn");
     const speakBtn = document.getElementById("speakBtn");
     const storyText = document.getElementById("story").innerText;
+    const titleScreen = document.getElementById("title-screen");
+    const content = document.getElementById("content");
 
-    // 🎶 Play / pause background music
+    // Show title screen, then fade out
+    window.onload = () => {
+      content.style.display = "none";
+      setTimeout(() => {
+        titleScreen.classList.add("fade-out");
+        setTimeout(() => {
+          titleScreen.style.display = "none";
+          content.style.display = "block";
+        }, 2000);
+      }, 3000); // show title for 3s
+    };
+
+    // Music control
     playBtn.addEventListener("click", () => {
       if (bgMusic.paused) {
         bgMusic.play();
@@ -59,14 +78,14 @@
       }
     });
 
-    // ⚡ Trigger lightning flash + thunder at end
+    // Flash + thunder near story end
     function triggerFlash() {
       flash.classList.add("active");
       thunder.play();
       setTimeout(() => flash.classList.remove("active"), 700);
     }
 
-    // 🔊 Read story with deeper voice, flash near the end
+    // Speak story
     function speakStory() {
       const voices = window.speechSynthesis.getVoices();
       const voice =
@@ -76,16 +95,11 @@
       speech.lang = "en-US";
       speech.rate = 0.9;
       speech.pitch = 0.8;
-
-      // estimate timing: flash 6s before end
-      const totalTime = storyText.split(" ").length * 200; // ms estimate
+      const totalTime = storyText.split(" ").length * 200;
       setTimeout(triggerFlash, totalTime - 6000);
-
       window.speechSynthesis.speak(speech);
     }
-
     speakBtn.addEventListener("click", speakStory);
-    window.speechSynthesis.onvoiceschanged = () => {};
   </script>
 </body>
 </html>
