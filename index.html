@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Pagal Anabia the Witch</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <div class="container">
+    <h1>Pagal Anabia the Witch</h1>
+    <p id="story">
+      In a forgotten forest covered in endless fog, there lived a strange witch — Pagal Anabia.
+      Her laughter echoed through the darkness, twisting the trees and waking shadows that should have slept forever.
+      She mixed potions that glowed like fireflies and whispered to the wind as if it were alive.
+      But one night, as the moon turned red, her spell went wrong.
+      The ground trembled, the fire died, and her own voice cursed her name.
+      With her last breath, she smiled and whispered, "Gagar will come back..."
+      Then, silence — forever.
+    </p>
+    <button id="speakBtn">🔊 Read Story</button>
+  </div>
+
+  <script>
+    const speakBtn = document.getElementById('speakBtn');
+    const storyText = document.getElementById('story').innerText;
+
+    speakBtn.addEventListener('click', () => {
+      const speech = new SpeechSynthesisUtterance(storyText);
+      speech.lang = 'en-US';
+      speech.rate = 0.9;
+      speech.pitch = 0.8;
+      window.speechSynthesis.speak(speech);
+    });
+  </script>
+</body>
+</html>
